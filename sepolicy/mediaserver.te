@@ -1,0 +1,12 @@
+allow mediaserver camera_prop:property_service { set };
+allow mediaserver system_server:unix_stream_socket { read write };
+allow mediaserver time_helper_device:chr_file rw_file_perms;
+allow mediaserver firmware_file:file r_file_perms;
+allow mediaserver firmware_file:dir search;
+allow mediaserver socket_device:sock_file write;
+allow mediaserver thermal-engine:unix_stream_socket connectto;
+allow mediaserver sensorservice_service:service_manager find;
+allow mediaserver system_file:file execmod;
+allow mediaserver sysfs_battery_supply:dir search;
+allow mediaserver sysfs_battery_supply:file r_file_perms;
+allow mediaserver debugfs_heaps_system:file r_file_perms;

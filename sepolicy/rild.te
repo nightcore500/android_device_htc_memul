@@ -1,0 +1,3 @@
+#============= rild ==============
+allow rild radio_device:dir rw_dir_perms;
+allow rild radio_device:file create_file_perms;

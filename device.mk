@@ -253,9 +253,6 @@ PRODUCT_PACKAGES += \
     com.android.nfc_extras \
     nfc_nci.pn54x.default
 
-# for magic values of NXP_CHIP_TYPE
-NXP_CHIP_TYPE := 1
-
 # Set build date
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 

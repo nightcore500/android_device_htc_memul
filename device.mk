@@ -199,10 +199,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     ebtables \
     ethertypes
-    
-# Gello
-PRODUCT_PACKAGES += \
-    Gello
      
 # Sensors
 PRODUCT_PACKAGES += \

@@ -24,3 +24,8 @@ LOCAL_SRC_FILES := camera_shim.cpp
 LOCAL_SHARED_LIBRARIES := libui
 LOCAL_MODULE := libshim_camera
 include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES := thermal.c
+LOCAL_MODULE := libshim_thermal
+include $(BUILD_SHARED_LIBRARY)

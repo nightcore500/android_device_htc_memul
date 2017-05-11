@@ -1,5 +1,4 @@
-allow thermal-engine self:capability { chown net_admin };
-allow thermal-engine self:netlink_kobject_uevent_socket { bind create read setopt };
-allow thermal-engine self:socket write;
-allow thermal-engine socket_device:dir w_dir_perms;
+allow thermal-engine self:capability chown;
 allow thermal-engine socket_device:sock_file { create setattr };
+allow thermal-engine sysfs_battery_supply:dir search;
+allow thermal-engine sysfs_battery_supply:file { open read write };

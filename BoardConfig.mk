@@ -47,7 +47,7 @@ TARGET_CPU_MEMCPY_BASE_OPT_DISABLE := true
 # Kernel
 BOARD_CUSTOM_BOOTIMG_MK := device/htc/memul/mkbootimg.mk
 BOARD_DTBTOOL_ARGS := --dt-tag "htc,project-id = <"
-BOARD_KERNEL_CMDLINE := console=none androidboot.hardware=qcom user_debug=31 ehci-hcd.park=3 zcache androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := console=none androidboot.hardware=qcom user_debug=31 ehci-hcd.park=3 zcache
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true

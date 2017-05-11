@@ -72,6 +72,10 @@ PRODUCT_PACKAGES += \
 # Camera shim
 PRODUCT_PACKAGES += \
     libshim_camera
+
+# Thermal Engine shim
+PRODUCT_PACKAGES += \
+    libshim_thermal
        
 # FM radio
 PRODUCT_PACKAGES += \

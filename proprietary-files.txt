@@ -149,6 +149,7 @@ etc/firmware/a330_pfp.fw
 etc/firmware/a330_pm4.fw
 etc/firmware/leia_pfp_470.fw
 etc/firmware/leia_pm4_470.fw
+vendor/lib/libuiblur.so
 
 # Media
 etc/firmware/venus.b00

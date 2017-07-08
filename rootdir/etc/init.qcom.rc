@@ -304,12 +304,6 @@ service akmd /system/bin/akmd
     class main
     user system
     group system misc input
-
-service config_bluetooth /system/bin/sh /system/etc/init.qcom.bt.sh "onboot"
-    class late_start
-    user root
-    seclabel u:r:bluetooth_loader:s0
-    oneshot
     
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     class late_start

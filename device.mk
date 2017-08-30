@@ -193,6 +193,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     librmnetctl \
     libcnefeatureconfig \
+    libshim_ril \
     libxml2
 
 # IPv6 tethering

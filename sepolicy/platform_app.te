@@ -1,2 +1,1 @@
-allow platform_app self:netlink_kobject_uevent_socket { bind create read setopt };
 allow platform_app battery_service:service_manager find;

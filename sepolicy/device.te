@@ -1,4 +1,1 @@
 type bluetooth_device, dev_type;
-type time_helper_device, dev_type;
-type sysfs_scaling_max_freq, sysfs_type, fs_type;
-type sysfs_max_gpuclk, sysfs_type, fs_type;

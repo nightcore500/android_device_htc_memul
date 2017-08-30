@@ -18,3 +18,8 @@ extern "C" int
 checkRequestInfo(struct RequestInfo* pRI) {
   return 0;
 }
+
+extern "C" int
+vsnprintf() {
+  return 0;
+}

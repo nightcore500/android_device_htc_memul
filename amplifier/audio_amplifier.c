@@ -101,7 +101,6 @@ static int amp_dev_close(hw_device_t *device)
 static int amp_module_open(const hw_module_t *module, UNUSED const char *name,
         hw_device_t **device)
 {
-    ALOGI("%s: Nightcore: amp_module_open function!\n", __func__);
     if (memul_dev) {
         ALOGE("%s:%d: Unable to open second instance of TFA9887 amplifier\n",
                 __func__, __LINE__);

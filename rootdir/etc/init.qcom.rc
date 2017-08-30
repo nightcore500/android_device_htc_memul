@@ -34,7 +34,7 @@ on early-init
     chmod 0755 /sys/kernel/debug
 
 on init
-    export LD_SHIM_LIBS "/system/lib/liblog.so|libshim_log.so:/system/lib/hw/camera.msm8226.so|/system/lib/libshim_camera.so:/system/bin/thermal-engine|libshim_thermal.so"
+    export LD_SHIM_LIBS "/system/lib/liblog.so|libshim_log.so:/system/lib/hw/camera.msm8226.so|/system/lib/libshim_camera.so:/system/vendor/bin/thermal-engine|libshim_thermal.so"
     
     # Set permissions for persist partition
     mkdir /persist 0771 system system
@@ -337,7 +337,7 @@ service rmt_storage /system/bin/rmt_storage modem_st1 modem_st2 fsc recovery rad
     user root
     group system wakelock
 
-service thermal-engine /system/bin/thermal-engine -c /etc/thermal-engine-8226.conf
+service thermal-engine /system/vendor/bin/thermal-engine -c /etc/thermal-engine-8226.conf
     class main
     user root
     group root

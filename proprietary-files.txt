@@ -39,6 +39,8 @@ etc/tfa/voip_l.preset
 
 # Bluetooth
 bin/hci_qcomm_init
+vendor/lib/libaptX-1.0.0-rel-Android21-ARMv7A.so
+vendor/lib/libaptXScheduler.so
 
 # Camera
 bin/mm-qcamera-daemon

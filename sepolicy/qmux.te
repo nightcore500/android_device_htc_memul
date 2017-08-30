@@ -1,4 +1,0 @@
-#============= qmuxd ==============
-allow qmuxd shell_exec:file { execute read open };
-allow qmuxd shell_exec:file execute_no_trans;
-allow qmuxd system_file:file execute_no_trans;

@@ -1,0 +1,6 @@
+##################################################
+# htc_diag_use(clientdomain)
+# allow clientdomain to read/write to htc_diag
+define(`htc_diag_use', `
+allow $1 htc_diag_device:chr_file rw_file_perms;
+')

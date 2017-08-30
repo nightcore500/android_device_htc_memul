@@ -1,4 +1,0 @@
-# allow vold mmc_block_device:blk_file rw_file_perms;
-allow vold root_block_device:blk_file rw_file_perms;
-allow vold logd:dir read;
-allow vold logd:lnk_file getattr;

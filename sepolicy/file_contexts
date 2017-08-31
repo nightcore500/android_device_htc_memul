@@ -20,8 +20,6 @@
 
 /data/misc/akmd/akmd_set.txt	u:object_r:sensors_data_file:s0
 
-/data/system/default_values	u:object_r:mpctl_data_file:s0
-
 /sys/devices/platform/htc_battery/power_supply/battery(/.*)?     u:object_r:sysfs_battery_supply:s0
 /sys/devices/platform/htc_battery/power_supply/usb(/.*)?         u:object_r:sysfs_usb_supply:s0
 /sys/devices/platform/htc_battery/power_supply/ac(/.*)?          u:object_r:sysfs_usb_supply:s0

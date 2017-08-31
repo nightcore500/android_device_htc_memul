@@ -8,9 +8,15 @@
 /dev/tfa9887			u:object_r:audio_device:s0
 /dev/tfa9887l			u:object_r:audio_device:s0
 
-/dev/htc_diag			u:object_r:htc_diag_device:s0
-/dev/radio        u:object_r:qcril_device:s0
-/dev/rfkill			  u:object_r:bluetooth_device:s0
+/dev/akm8963_dev		u:object_r:sensors_device:s0
+/dev/akm8963        u:object_r:sensors_device:s0
+/dev/cm3602			    u:object_r:sensors_device:s0
+/dev/lightsensor		u:object_r:sensors_device:s0
+
+/dev/htc_diag			  u:object_r:htc_diag_device:s0
+/dev/radio          u:object_r:qcril_device:s0
+/dev/rfkill			    u:object_r:bluetooth_device:s0
+/dev/time_helper		u:object_r:time_helper_device:s0
 
 /data/cam_socket[0-9]		u:object_r:camera_socket:s0
 

@@ -4,4 +4,5 @@ init_daemon_domain(akmd)
 
 allow akmd sensors_data_file:file create_file_perms;
 allow akmd sensors_device:chr_file rw_file_perms;
-allow akmd system_data_file:dir { read write setattr open add_name create };
+allow akmd system_data_file:dir create_dir_perms;
+type_transition akmd system_data_file:file sensors_data_file;

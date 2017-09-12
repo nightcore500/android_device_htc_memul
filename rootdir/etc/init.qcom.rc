@@ -381,6 +381,3 @@ on property:ro.data.large_tcp_window_size=true
     
 on property:persist.timed.enable=true
     start time_daemon
- 
-on property:service.adb.root=1
-    write /sys/class/android_usb/android0/restart_adbd 1

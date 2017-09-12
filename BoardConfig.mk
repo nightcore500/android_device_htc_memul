@@ -108,9 +108,6 @@ TARGET_POWERHAL_VARIANT := qcom
 # RIL
 TARGET_RIL_VARIANT := caf
 
-# RPC
-TARGET_NO_RPC := true
-
 # SDClang
 TARGET_USE_SDCLANG := true
  

@@ -22,7 +22,7 @@
 # definition file).
 #
 
-LOCAL_PATH := device/htc/memul
+PLATFORM_PATH := device/htc/memul
 
 BOARD_VENDOR := htc
 
@@ -145,7 +145,7 @@ BOARD_GLOBAL_CFLAGS := -DBOARD_RECOVERY_BLDRMSG_OFFSET=2048
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_USES_MMCUTILS := true
-TARGET_RECOVERY_DEVICE_DIRS += device/htc/memul/
+TARGET_RECOVERY_DEVICE_DIRS += $(PLATFORM_PATH)
 TARGET_RECOVERY_DEVICE_MODULES += chargeled
 
 # Hardware
@@ -167,13 +167,13 @@ ifeq ($(RECOVERY_VARIANT),twrp)
   TW_INCLUDE_NTFS_3G := true
   TWRP_INCLUDE_LOGCAT := true
   TW_THEME := portrait_hdpi
-  TARGET_RECOVERY_FSTAB := device/htc/memul/rootdir/etc/twrp.fstab
+  TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/rootdir/etc/twrp.fstab
   RECOVERY_GRAPHICS_USE_LINELENGTH := true
   TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
   RECOVERY_SDCARD_ON_DATA := true
   BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 else
-  TARGET_RECOVERY_FSTAB := device/htc/memul/rootdir/etc/fstab.qcom
+  TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/rootdir/etc/fstab.qcom
 endif
 
 # SELinux

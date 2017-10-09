@@ -178,8 +178,6 @@ etc/firmware/venus.b03
 etc/firmware/venus.b04
 etc/firmware/venus.mbn
 etc/firmware/venus.mdt
-vendor/lib/libI420colorconvert.so
-vendor/lib/libmm-color-convertor.so
 vendor/lib/libOmxAacDec.so
 vendor/lib/libOmxAmrwbplusDec.so
 vendor/lib/libOmxEvrcDec.so
@@ -254,8 +252,6 @@ etc/firmware/widevine.b03
 etc/firmware/widevine.mdt
 lib/libdrmdecrypt.so
 vendor/lib/drm/libdrmwvmplugin.so
-vendor/lib/libDivxDrm.so
-vendor/lib/libSHIMDivxDrm.so
 vendor/lib/libWVStreamControlAPI_L3.so
 vendor/lib/libwvdrm_L3.so
 vendor/lib/libwvm.so

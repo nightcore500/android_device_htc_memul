@@ -31,6 +31,10 @@ import init.qcom.usb.rc
 
 on early-init
     symlink /data/tombstones /tombstones
+    
+    mkdir /firmware 0771 system system
+    mkdir /firmware/adsp 0771 system system
+    mkdir /firmware/radio 0771 system system
 
     mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
@@ -77,23 +81,7 @@ on init
     chown system system /sys/android_touch/doubletap2wake
     chmod 0664 /sys/android_touch/doubletap2wake
 
-# On emmc mount the partition containing firmware
 on fs
-    # create firmware mount points
-    mkdir /devlog 0700 root root
-
-    # Create firmware linking directories
-    mkdir /firmware 0771 system system
-    mkdir /vendor 0771 system system
-    mkdir /vendor/firmware 0771 system system
-    mkdir /firmware/radio 0771 system system
-    mkdir /firmware/adsp 0771 system system
-    mkdir /firmware/wcnss 0771 system system
-    mkdir /fataldevlog 0700 root root
-    mkdir /ramdump 0700 root root
-    mkdir /carrier 0770 system carrier
-    mkdir /custdata 0771 system system
-
     mount_all /fstab.qcom
     
     # zram

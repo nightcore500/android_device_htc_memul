@@ -104,8 +104,6 @@ on fs
     mkdir /mnt/securedata 0755 system system
     mount tmpfs tmpfs /mnt/securedata mode=0755,gid=1000
 
-    setprop ro.crypto.fuse_sdcard true
-
 on post-fs-data
     # Create symbolic links to mount points outside of /data
     symlink /mnt/qcks /data/qcks

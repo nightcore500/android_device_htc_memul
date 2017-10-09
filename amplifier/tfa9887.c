@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2013, The CyanogenMod Project
+ * Copyright (C) 2013-2015 The CyanogenMod Project
+ *               2017 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,21 +18,21 @@
 #define LOG_TAG "tfa9887"
 //#define LOG_NDEBUG 0
 
+#include "tfa9887.h"
+
+#include <linux/tfa9887.h>
+
+#include <cutils/log.h>
+#include <tinyalsa/asoundlib.h>
+
 #include <errno.h>
 #include <fcntl.h>
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
-
 #include <sys/ioctl.h>
-
-#include <cutils/log.h>
-
-#include <system/audio.h>
-#include <tinyalsa/asoundlib.h>
-
-#include "tfa9887.h"
+#include <unistd.h>
 
 #define UNUSED __attribute__((unused))
 
@@ -166,14 +167,18 @@ void * write_dummy_data(void *param)
         goto err_close_pcm;
     }
 
+    bool signaled = false;
     do {
         if (pcm_write(pcm, buffer, size)) {
             ALOGE("%s: pcm_write failed", __func__);
         }
-        pthread_mutex_lock(&amp->mutex);
-        amp->writing = true;
-        pthread_cond_signal(&amp->cond);
-        pthread_mutex_unlock(&amp->mutex);
+        if (!signaled) {
+            pthread_mutex_lock(&amp->mutex);
+            amp->writing = true;
+            pthread_cond_signal(&amp->cond);
+            pthread_mutex_unlock(&amp->mutex);
+            signaled = true;
+        }
     } while (amp->initializing);
 
 err_free:
@@ -279,15 +284,15 @@ static int tfa9887_read_reg(struct tfa9887_amp_t *amp, uint8_t reg,
     /* unsure why the first byte is skipped */
     buf[0] = 0;
     buf[1] = reg;
-    if ((ret = ioctl(amp->fd, TPA9887_WRITE_CONFIG, &reg_val)) != 0) {
-        ALOGE("ioctl %d failed, ret = %d", TPA9887_WRITE_CONFIG, ret);
+    if ((ret = ioctl(amp->fd, TFA9887_WRITE_CONFIG, &reg_val)) != 0) {
+        ALOGE("ioctl %d failed, ret = %d", TFA9887_WRITE_CONFIG, ret);
         goto read_reg_err;
     }
 
     reg_val[0] = 2;
     reg_val[1] = (unsigned int) &buf;
-    if ((ret = ioctl(amp->fd, TPA9887_READ_CONFIG, &reg_val)) != 0) {
-        ALOGE("ioctl %d failed, ret = %d", TPA9887_READ_CONFIG, ret);
+    if ((ret = ioctl(amp->fd, TFA9887_READ_CONFIG, &reg_val)) != 0) {
+        ALOGE("ioctl %d failed, ret = %d", TFA9887_READ_CONFIG, ret);
         goto read_reg_err;
     }
 
@@ -316,8 +321,8 @@ static int tfa9887_write_reg(struct tfa9887_amp_t *amp, uint8_t reg,
     buf[1] = reg;
     buf[2] = (0xFF00 & val) >> 8;
     buf[3] = (0x00FF & val);
-    if ((ret = ioctl(amp->fd, TPA9887_WRITE_CONFIG, &reg_val)) != 0) {
-        ALOGE("ioctl %d failed, ret = %d", TPA9887_WRITE_CONFIG, ret);
+    if ((ret = ioctl(amp->fd, TFA9887_WRITE_CONFIG, &reg_val)) != 0) {
+        ALOGE("ioctl %d failed, ret = %d", TFA9887_WRITE_CONFIG, ret);
         goto write_reg_err;
     }
 
@@ -343,15 +348,15 @@ static int tfa9887_read(struct tfa9887_amp_t *amp, int addr, uint8_t *buf,
     /* unsure why the first byte is skipped */
     reg_buf[0] = 0;
     reg_buf[1] = (0xFF & addr);
-    if ((ret = ioctl(amp->fd, TPA9887_WRITE_CONFIG, &reg_val)) != 0) {
-        ALOGE("ioctl %d failed, ret = %d", TPA9887_WRITE_CONFIG, ret);
+    if ((ret = ioctl(amp->fd, TFA9887_WRITE_CONFIG, &reg_val)) != 0) {
+        ALOGE("ioctl %d failed, ret = %d", TFA9887_WRITE_CONFIG, ret);
         goto read_err;
     }
 
     reg_val[0] = len;
     reg_val[1] = (unsigned int) &kernel_buf;
-    if ((ret = ioctl(amp->fd, TPA9887_READ_CONFIG, &reg_val)) != 0) {
-        ALOGE("ioctl %d failed, ret = %d", TPA9887_READ_CONFIG, ret);
+    if ((ret = ioctl(amp->fd, TFA9887_READ_CONFIG, &reg_val)) != 0) {
+        ALOGE("ioctl %d failed, ret = %d", TFA9887_READ_CONFIG, ret);
         goto read_err;
     }
     memcpy(buf, kernel_buf, len);
@@ -379,8 +384,8 @@ static int tfa9887_write(struct tfa9887_amp_t *amp, int addr,
     ioctl_buf[1] = (0xFF & addr);
     memcpy(ioctl_buf + 2, buf, len);
 
-    if ((ret = ioctl(amp->fd, TPA9887_WRITE_CONFIG, &reg_val)) != 0) {
-        ALOGE("ioctl %d failed, ret = %d", TPA9887_WRITE_CONFIG, ret);
+    if ((ret = ioctl(amp->fd, TFA9887_WRITE_CONFIG, &reg_val)) != 0) {
+        ALOGE("ioctl %d failed, ret = %d", TFA9887_WRITE_CONFIG, ret);
         goto write_err;
     }
 
@@ -456,6 +461,7 @@ static int tfa9887_load_patch(struct tfa9887_amp_t *amp, const char *file_name)
     uint8_t buffer[MAX_I2C_LENGTH];
     uint32_t value = 0;
     uint16_t status;
+    uint16_t status_ok = TFA9887_STATUS_VDDS | TFA9887_STATUS_PLLS | TFA9887_STATUS_CLKS;
 
     if (!amp) {
         return -ENODEV;
@@ -469,7 +475,7 @@ static int tfa9887_load_patch(struct tfa9887_amp_t *amp, const char *file_name)
 
     error = tfa9887_read_reg(amp, TFA9887_STATUS, &status);
     if (error != 0) {
-        if ((status & 0x0043) != 0x0043) {
+        if ((status & status_ok) != status_ok) {
             /* one of Vddd, PLL and clocks not ok */
             error = -1;
         }
@@ -1295,7 +1301,7 @@ static int tfa9887_lock(struct tfa9887_amp_t *amp, bool lock)
 
     reg_value[0] = 1;
     reg_value[1] = lock ? 1 : 0;
-    rc = ioctl(amp->fd, TPA9887_KERNEL_LOCK, &reg_value);
+    rc = ioctl(amp->fd, TFA9887_KERNEL_LOCK, &reg_value);
     if (rc) {
         rc = -errno;
         ALOGE("%s: Failed to lock amplifier: %d\n",
@@ -1321,7 +1327,7 @@ static int tfa9887_enable_dsp(struct tfa9887_amp_t *amp, bool enable)
 
     reg_value[0] = 1;
     reg_value[1] = enable ? 1 : 0;
-    rc = ioctl(amp->fd, TPA9887_ENABLE_DSP, &reg_value);
+    rc = ioctl(amp->fd, TFA9887_ENABLE_DSP, &reg_value);
     if (rc) {
         rc = -errno;
         ALOGE("%s: Failed to enable DSP mode: %d\n",

@@ -821,37 +821,37 @@
     <!-- LINEOUT = -6 dB, DEC = -1 dB -->
     <path name="earpiece">
         <path name="earpiece-generic" />
-        <ctl name="RX3 Digital Volume" value="90" />
-        <ctl name="RX4 Digital Volume" value="90" />
-        <ctl name="LINEOUT1 Volume" value="17" />
-        <ctl name="LINEOUT2 Volume" value="17" />
+        <ctl name="RX3 Digital Volume" value="84" />
+        <ctl name="RX4 Digital Volume" value="84" />
+        <ctl name="LINEOUT1 Volume" value="14" />
+        <ctl name="LINEOUT2 Volume" value="14" />
     </path>
 
     <!-- LINEOUT = -6 dB, DEC = -1 dB -->
     <path name="earpiece-voice">
         <path name="earpiece-generic" />
-        <ctl name="RX3 Digital Volume" value="90" />
-        <ctl name="RX4 Digital Volume" value="90" />
-        <ctl name="LINEOUT1 Volume" value="17" />
-        <ctl name="LINEOUT2 Volume" value="17" />
+        <ctl name="RX3 Digital Volume" value="84" />
+        <ctl name="RX4 Digital Volume" value="84" />
+        <ctl name="LINEOUT1 Volume" value="14" />
+        <ctl name="LINEOUT2 Volume" value="14" />
     </path>
 
     <!-- LINEOUT = -6 dB, DEC = -1 dB -->
     <path name="earpiece-hac-voice">
         <path name="earpiece-generic" />
-        <ctl name="RX3 Digital Volume" value="90" />
-        <ctl name="RX4 Digital Volume" value="90" />
-        <ctl name="LINEOUT1 Volume" value="17" />
-        <ctl name="LINEOUT2 Volume" value="17" />
+        <ctl name="RX3 Digital Volume" value="84" />
+        <ctl name="RX4 Digital Volume" value="84" />
+        <ctl name="LINEOUT1 Volume" value="14" />
+        <ctl name="LINEOUT2 Volume" value="14" />
     </path>
 
     <!-- LINEOUT = -6 dB, DEC = -1 dB -->
     <path name="earpiece-hw-voip">
         <path name="earpiece-generic" />
-        <ctl name="RX3 Digital Volume" value="90" />
-        <ctl name="RX4 Digital Volume" value="90" />
-        <ctl name="LINEOUT1 Volume" value="17" />
-        <ctl name="LINEOUT2 Volume" value="17" />
+        <ctl name="RX3 Digital Volume" value="84" />
+        <ctl name="RX4 Digital Volume" value="84" />
+        <ctl name="LINEOUT1 Volume" value="14" />
+        <ctl name="LINEOUT2 Volume" value="14" />
     </path>
 
     <path name="headset-mic-generic">

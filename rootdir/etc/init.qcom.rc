@@ -277,10 +277,6 @@ on boot
     # Load ADSP
     write /sys/kernel/boot_adsp/boot 1
     
-    # Adaptive LMK
-    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
-    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 53059
-    
 ## Service start here
 service adsprpcd /system/bin/adsprpcd
     class main
@@ -299,12 +295,6 @@ service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     disabled
     seclabel u:r:bluetooth_loader:s0
     oneshot
-
-service mpdecision /system/bin/mpdecision --avg_comp
-    class main
-    user root
-    group root readproc
-    disabled
 
 service netmgrd /system/bin/netmgrd
     class core

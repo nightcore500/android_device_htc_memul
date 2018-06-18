@@ -229,6 +229,7 @@ PRODUCT_PACKAGES += \
 # WiFi
 PRODUCT_PACKAGES += \
     hostapd \
+    libwcnss_qmi \
     libwpa_client \
     wpa_supplicant \
     wpa_supplicant.conf \

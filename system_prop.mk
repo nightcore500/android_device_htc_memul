@@ -119,11 +119,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     media.stagefright.legacyencoder=true \
     media.stagefright.less-secure=true
-    
-#Set composition for USB
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=charged
-
-#Set read only default composition for USB    
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sys.usb.default.config=charged
